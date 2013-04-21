@@ -35,7 +35,7 @@ def __
   if RUBY_VERSION < "1.9"
     value
   else
-    (value19 == :mu) ? value : value19
+    (RUBY_VERSION == :mu) ? value : RUBY_VERSION
   end
 end
 
