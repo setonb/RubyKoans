@@ -14,13 +14,20 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  if a == b && b ==c
-  	:equilateral
-  elsif a == b || b == c || a == c
-  	:isosceles
-  else
-  	:scalene
-  end
+	if a <= 0 || b <=0 || c <=0
+		raise TriangleError, "Can't have a side less than or equal to zero."
+	end
+	x,y,z = [a,b,c].sort
+	if x + y <= z
+		raise TriangleError, "No two sides can be less than or equal to the third side."
+	end
+  	if a == b && b ==c
+  		:equilateral
+  	elsif a == b || b == c || a == c
+  		:isosceles
+  	else
+  		:scalene
+  	end		
 end
 
 # Error class used in part 2.  No need to change this code.
