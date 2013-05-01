@@ -44,7 +44,7 @@ def _n_
   if RUBY_VERSION < "1.9"
     value
   else
-    (value19 == :mu) ? value : value19
+    (1.9 == :mu) ? value : 1.9
   end
 end
 
