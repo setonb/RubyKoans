@@ -31,53 +31,91 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   # You need to write this method
-  ones = []
-  fives = []
-  set = []
+  ones = 0
+  twos = 0
+  threes = 0
+  fours = 0
+  fives = 0
+  sixes = 0
   score = 0
   dice.each do |die|
     if die == 1
-      if ones.length < 3
-        ones << die
-      else
-        score += 100
-      end
+        ones += 1
+    elsif die == 2
+        twos += 1
+    elsif die == 3
+        threes += 1
+    elsif die == 4
+        fours += 1
     elsif die == 5
-      if fives.length < 3
-        fives << die
-      else
-        score += 50
-      end
-    else
-      set << die
+        fives += 1
+    elsif die == 6
+        sixes += 1
     end
   end
-  if ones.length == 3
+
+  if ones >= 3
     score += 1000
-  else
-    ones.each do |die|
-      score += 100
+    extraones = ones - 3
+    if extraones
+      score += extraones * 100
     end
+  elsif ones < 3
+      score += ones * 100
   end
-  if fives.length == 3
+
+  if fives >= 3
     score += 500
-  else
-    fives.each do |die|
-      score += 50
+    extrafives = fives - 3
+    if extrafives
+      score += extrafives * 50
     end
+  elsif fives < 3
+      score += fives * 50
   end
-  secret_set = [set[0]]
-  if set.length >= 3
-    set.each do |die|
-      if secret_set.include?(die)
-        secret_set << die
-      end
-    end
-    if secret_set.length >= 3
-      score += secret_set[0] * 100
-    end
+
+  if twos >= 3
+      score += 2 * 100
+  end
+
+  if threes >= 3
+      score += 3 * 100
+  end
+
+  if fours >= 3
+      score += 4 * 100
+  end
+
+  if sixes >= 3
+      score += 6 * 100
   end
   score
+  # if ones.length == 3
+  #   score += 1000
+  # else
+  #   ones.each do |die|
+  #     score += 100
+  #   end
+  # end
+  # if fives.length == 3
+  #   score += 500
+  # else
+  #   fives.each do |die|
+  #     score += 50
+  #   end
+  # end
+  # secret_set = [set[0]]
+  # if set.length >= 3
+  #   set.each do |die|
+  #     if secret_set.include?(die)
+  #       secret_set << die
+  #     end
+  #   end
+  #   if secret_set.length >= 3
+  #     score += secret_set[0] * 100
+  #   end
+  # end
+  # score
 end
 
 class AboutScoringProject < Neo::Koan
